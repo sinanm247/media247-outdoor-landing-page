@@ -1,0 +1,190 @@
+@import "../../../styles/theme";
+
+.about-us-section.section-container {
+    position: relative;
+    overflow: hidden;
+    background: $bg-grey;
+    @include section-pad;
+
+    .about-us-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 90px;
+    }
+
+    .about-image {
+        perspective: 1400px;
+        padding-bottom: 70px;
+    }
+
+    .billboard {
+        position: relative;
+        transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        transform-style: preserve-3d;
+        transition: transform 0.6s $ease-out;
+    }
+
+    .billboard-panel {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        padding: 10px;
+        border-radius: 18px;
+        background: $ink;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.6),
+            0 40px 80px -30px rgba(0, 0, 0, 0.55);
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transform: scale(1.04);
+            transition: transform 1.2s $ease-out;
+        }
+
+        // Glare that follows the cursor
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border-radius: 10px;
+            background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.22), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+    }
+
+    .billboard:hover .billboard-panel {
+        img {
+            transform: scale(1.1);
+        }
+
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    .billboard-pole {
+        position: absolute;
+        left: 50%;
+        bottom: -70px;
+        width: 26px;
+        height: 90px;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, #2a2a2d, #4a4a4f 50%, #2a2a2d);
+        border-radius: 4px 4px 0 0;
+        z-index: 1;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 120px;
+            height: 10px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3), transparent 70%);
+        }
+    }
+
+    .billboard-lamp {
+        position: absolute;
+        top: -18px;
+        z-index: 3;
+        width: 46px;
+        height: 10px;
+        border-radius: 6px;
+        background: $ink;
+
+        // Light beam onto the panel
+        &::after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 260px;
+            height: 220px;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.28), transparent 65%);
+            clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%);
+            opacity: 0.6;
+            pointer-events: none;
+            animation: lampFlicker 6s ease-in-out infinite;
+        }
+
+        &--left { left: 22%; }
+        &--right { right: 22%; }
+        &--right::after { animation-delay: 1.3s; }
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .section-title {
+        margin: 0;
+        @include display-title(52px);
+        color: $text-dark;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 6px;
+        padding-left: 24px;
+        border-left: 3px solid $primary;
+    }
+
+    .section-description {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.85;
+        color: $text-muted;
+    }
+
+    @include bp(1200px) {
+        .about-us-wrapper {
+            gap: 56px;
+        }
+    }
+
+    @include bp(1024px) {
+        .about-us-wrapper {
+            grid-template-columns: 1fr;
+        }
+
+        .about-image {
+            max-width: 640px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+
+    @include bp(600px) {
+        .content-wrapper {
+            padding-left: 16px;
+        }
+
+        .section-description {
+            font-size: 15px;
+        }
+    }
+}
+
+@keyframes lampFlicker {
+    0%, 100% { opacity: 0.6; }
+    48% { opacity: 0.6; }
+    50% { opacity: 0.25; }
+    52% { opacity: 0.6; }
+}

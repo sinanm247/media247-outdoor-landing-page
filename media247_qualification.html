@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Your Free Audit — Media247 Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #080C10;
+    --dark-2: #0D1318;
+    --dark-3: #131A22;
+    --text: #E8E4DC;
+    --text-muted: #8A9099;
+    --white: #FAFAF8;
+    --error: #E05555;
+    --success: #4CAF82;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  .page-wrap {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--dark-2);
+    border-right: 1px solid rgba(201,168,76,0.1);
+    padding: 60px 48px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 60px;
+  }
+
+  .logo span { color: var(--gold); }
+
+  .sidebar-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .sidebar-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .sidebar-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .benefit {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .benefit-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--gold);
+  }
+
+  .benefit-text h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+  }
+
+  .benefit-text p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* FORM AREA */
+  .form-area {
+    padding: 60px 72px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 2px;
+    background: rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* STEPS */
+  .step {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    animation: stepIn 0.4s ease forwards;
+  }
+
+  .step.active { display: flex; }
+
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-num-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .step-num-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--gold);
+  }
+
+  .step h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .step-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 44px;
+    line-height: 1.6;
+  }
+
+  /* OPTION CARDS */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .options-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .option-card {
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 22px 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    user-select: none;
+  }
+
+  .option-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    background: var(--dark-3);
+  }
+
+  .option-card.selected {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .option-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 12px; right: 14px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .option-emoji {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .option-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  .option-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* TEXT INPUTS */
+  .input-group {
+    margin-bottom: 24px;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    width: 100%;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+
+  .input-group input:focus,
+  .input-group select:focus,
+  .input-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .input-group select {
+    cursor: pointer;
+  }
+
+  .input-group select option {
+    background: var(--dark-3);
+    color: var(--text);
+  }
+
+  .input-group textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* QUALIFIER PILL */
+  .qualifier-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 32px;
+  }
+
+  /* NAV BUTTONS */
+  .form-nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 32px;
+  }
+
+  .btn-next {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-next:hover { background: var(--gold-light); }
+  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text-muted);
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-back:hover {
+    border-color: rgba(201,168,76,0.4);
+    color: var(--text);
+  }
+
+  .disqualified-msg {
+    display: none;
+    background: rgba(224,85,85,0.07);
+    border: 1px solid rgba(224,85,85,0.2);
+    padding: 32px;
+    margin-top: 20px;
+  }
+
+  .disqualified-msg h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #E88;
+  }
+
+  .disqualified-msg p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* SUCCESS */
+  .success-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    padding: 60px 0;
+    animation: stepIn 0.5s ease forwards;
+  }
+
+  .success-screen.visible { display: flex; }
+
+  .success-icon {
+    width: 80px; height: 80px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 32px;
+    color: var(--gold);
+  }
+
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .success-screen p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .whatsapp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25D366;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+
+  .whatsapp-cta:hover { background: #1dbd5a; }
+
+  .next-steps {
+    margin-top: 48px;
+    display: flex;
+    gap: 32px;
+    text-align: left;
+  }
+
+  .next-step {
+    flex: 1;
+    background: var(--dark-2);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 24px;
+  }
+
+  .next-step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: rgba(201,168,76,0.3);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .next-step h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .next-step p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .page-wrap { grid-template-columns: 1fr; }
+    .sidebar { position: relative; height: auto; padding: 40px 24px; }
+    .sidebar-benefits { display: none; }
+    .form-area { padding: 40px 24px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .options-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .input-row { grid-template-columns: 1fr; }
+    .next-steps { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">Media<span>247</span> Digital</div>
+
+    <div class="sidebar-headline">
+      Let's find out if we're<br><em>the right fit.</em>
+    </div>
+    <p class="sidebar-desc">
+      This takes 2 minutes. We review every submission personally and only take on brands we know we can grow.
+    </p>
+
+    <div class="sidebar-benefits">
+      <div class="benefit">
+        <div class="benefit-icon">🔍</div>
+        <div class="benefit-text">
+          <h4>Free Account Audit</h4>
+          <p>We'll review your current Google & LinkedIn setup and identify exactly where budget is leaking.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📊</div>
+        <div class="benefit-text">
+          <h4>Custom Growth Forecast</h4>
+          <p>Based on your budget and ICP, we'll project what's realistically achievable in 60–90 days.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">⚡</div>
+        <div class="benefit-text">
+          <h4>No-Fluff 20-Min Call</h4>
+          <p>No generic pitches. Just your numbers, your gaps, and a clear plan of action.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🇦🇪</div>
+        <div class="benefit-text">
+          <h4>UAE Market Specialists</h4>
+          <p>We only work with UAE brands. We know the landscape, the audience behaviour, and what converts here.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      All information shared is confidential and used only to prepare for your strategy call.
+    </div>
+  </aside>
+
+  <!-- FORM AREA -->
+  <main class="form-area">
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:16.6%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Step 1 of 6</div>
+    </div>
+
+    <!-- STEP 1: Industry -->
+    <div class="step active" id="step1">
+      <div class="step-num-label">Step 1 of 6</div>
+      <h2>What industry<br>are you in?</h2>
+      <p class="step-sub">This helps us match you with the right case studies and approach before the call.</p>
+
+      <div class="options-grid cols-3">
+        <div class="option-card" data-value="ecommerce" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">🛒</span>
+          <div class="option-title">E-Commerce / DTC</div>
+          <div class="option-desc">Online retail, fashion, beauty, lifestyle</div>
+        </div>
+        <div class="option-card" data-value="fnb" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">🍽️</span>
+          <div class="option-title">F&B / Hospitality</div>
+          <div class="option-desc">Restaurants, cafés, hotel groups</div>
+        </div>
+        <div class="option-card" data-value="wellness" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">💆</span>
+          <div class="option-title">Aesthetic / Wellness</div>
+          <div class="option-desc">Clinics, med-spas, dental, fitness</div>
+        </div>
+        <div class="option-card" data-value="realestate" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">🏢</span>
+          <div class="option-title">Real Estate</div>
+          <div class="option-desc">Developers, brokerages, rentals</div>
+        </div>
+        <div class="option-card" data-value="b2b" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">💼</span>
+          <div class="option-title">B2B / Professional</div>
+          <div class="option-desc">SaaS, consulting, services</div>
+        </div>
+        <div class="option-card" data-value="other" onclick="selectOption(this, 'industry')">
+          <span class="option-emoji">✦</span>
+          <div class="option-title">Other</div>
+          <div class="option-desc">Education, logistics, other</div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-next" onclick="nextStep(1)" id="next1" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Monthly Ad Spend -->
+    <div class="step" id="step2">
+      <div class="step-num-label">Step 2 of 6</div>
+      <h2>What's your current<br>monthly ad spend?</h2>
+      <p class="step-sub">This helps us understand whether our services are the right fit for your current stage.</p>
+
+      <div class="options-grid">
+        <div class="option-card disqualify" data-value="under5k" onclick="selectOption(this, 'spend')">
+          <span class="option-emoji">🌱</span>
+          <div class="option-title">Under AED 5,000/mo</div>
+          <div class="option-desc">Just getting started</div>
+        </div>
+        <div class="option-card" data-value="5k-15k" onclick="selectOption(this, 'spend')">
+          <span class="option-emoji">📈</span>
+          <div class="option-title">AED 5,000 – 15,000/mo</div>
+          <div class="option-desc">Running campaigns, need better ROI</div>
+        </div>
+        <div class="option-card" data-value="15k-50k" onclick="selectOption(this, 'spend')">
+          <span class="option-emoji">🚀</span>
+          <div class="option-title">AED 15,000 – 50,000/mo</div>
+          <div class="option-desc">Scaling and optimising</div>
+        </div>
+        <div class="option-card" data-value="50k-plus" onclick="selectOption(this, 'spend')">
+          <span class="option-emoji">💎</span>
+          <div class="option-title">AED 50,000+/mo</div>
+          <div class="option-desc">Serious scale, need specialist</div>
+        </div>
+      </div>
+
+      <div id="disqualify-spend" class="disqualified-msg">
+        <h3>Thanks for being honest.</h3>
+        <p>Our services are most effective for businesses spending at least AED 5,000/month on ads. At under that level, our management fee wouldn't give you the ROI you deserve. We'd recommend building your organic presence first and revisiting paid ads when you're ready to invest. Feel free to reach out when you get there — we'd love to work with you.</p>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(2)">← Back</button>
+        <button class="btn-next" onclick="nextStep(2)" id="next2" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Current situation -->
+    <div class="step" id="step3">
+      <div class="step-num-label">Step 3 of 6</div>
+      <h2>What's your biggest<br>challenge right now?</h2>
+      <p class="step-sub">Select all that apply. This lets us prepare the most relevant audit for you.</p>
+
+      <div class="options-grid">
+        <div class="option-card multi" data-value="high-cpl" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">💸</span>
+          <div class="option-title">Cost per lead is too high</div>
+          <div class="option-desc">Spending a lot, getting few leads</div>
+        </div>
+        <div class="option-card multi" data-value="low-quality" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">🎯</span>
+          <div class="option-title">Leads are low quality</div>
+          <div class="option-desc">Lots of leads, very few convert</div>
+        </div>
+        <div class="option-card multi" data-value="no-strategy" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">🗺️</span>
+          <div class="option-title">No clear paid strategy</div>
+          <div class="option-desc">Running ads but no real plan</div>
+        </div>
+        <div class="option-card multi" data-value="scaling" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">📊</span>
+          <div class="option-title">Can't scale profitably</div>
+          <div class="option-desc">Works at low spend, breaks at scale</div>
+        </div>
+        <div class="option-card multi" data-value="creative" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">🎨</span>
+          <div class="option-title">Weak creative / copy</div>
+          <div class="option-desc">Ads don't stop the scroll</div>
+        </div>
+        <div class="option-card multi" data-value="reporting" onclick="toggleMulti(this, 'challenge')">
+          <span class="option-emoji">📉</span>
+          <div class="option-title">No visibility on ROI</div>
+          <div class="option-desc">Can't track what's actually working</div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(3)">← Back</button>
+        <button class="btn-next" onclick="nextStep(3)" id="next3" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Platforms -->
+    <div class="step" id="step4">
+      <div class="step-num-label">Step 4 of 6</div>
+      <h2>Which platforms are<br>you currently running?</h2>
+      <p class="step-sub">Select all that apply. Even if they're not working well — that's what we're here to fix.</p>
+
+      <div class="options-grid cols-3">
+        <div class="option-card multi" data-value="google" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">🔍</span>
+          <div class="option-title">Google Ads</div>
+          <div class="option-desc">Search, Display, Performance Max</div>
+        </div>
+        <div class="option-card multi" data-value="linkedin" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">💼</span>
+          <div class="option-title">LinkedIn Ads</div>
+          <div class="option-desc">Sponsored content, lead gen forms</div>
+        </div>
+        <div class="option-card multi" data-value="meta" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">📘</span>
+          <div class="option-title">Meta Ads</div>
+          <div class="option-desc">Facebook & Instagram</div>
+        </div>
+        <div class="option-card multi" data-value="tiktok" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">🎵</span>
+          <div class="option-title">TikTok Ads</div>
+          <div class="option-desc">Video-first performance</div>
+        </div>
+        <div class="option-card multi" data-value="snapchat" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">👻</span>
+          <div class="option-title">Snapchat Ads</div>
+          <div class="option-desc">Strong in UAE market</div>
+        </div>
+        <div class="option-card multi" data-value="none" onclick="toggleMulti(this, 'platform')">
+          <span class="option-emoji">🆕</span>
+          <div class="option-title">Starting Fresh</div>
+          <div class="option-desc">No active campaigns yet</div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(4)">← Back</button>
+        <button class="btn-next" onclick="nextStep(4)" id="next4" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Goal -->
+    <div class="step" id="step5">
+      <div class="step-num-label">Step 5 of 6</div>
+      <h2>What's your primary<br>growth goal?</h2>
+      <p class="step-sub">This helps us calibrate the right success metrics for your audit.</p>
+
+      <div class="options-grid">
+        <div class="option-card" data-value="more-leads" onclick="selectOption(this, 'goal')">
+          <span class="option-emoji">📥</span>
+          <div class="option-title">More qualified leads</div>
+          <div class="option-desc">Fill the pipeline with better-fit prospects</div>
+        </div>
+        <div class="option-card" data-value="lower-cpa" onclick="selectOption(this, 'goal')">
+          <span class="option-emoji">💰</span>
+          <div class="option-title">Lower cost per acquisition</div>
+          <div class="option-desc">Same results, less spend</div>
+        </div>
+        <div class="option-card" data-value="scale-roas" onclick="selectOption(this, 'goal')">
+          <span class="option-emoji">🚀</span>
+          <div class="option-title">Scale ad spend profitably</div>
+          <div class="option-desc">Grow budget without tanking ROAS</div>
+        </div>
+        <div class="option-card" data-value="brand-awareness" onclick="selectOption(this, 'goal')">
+          <span class="option-emoji">📣</span>
+          <div class="option-title">Build brand in UAE</div>
+          <div class="option-desc">Awareness + demand generation</div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(5)">← Back</button>
+        <button class="btn-next" onclick="nextStep(5)" id="next5" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 6: Contact -->
+    <div class="step" id="step6">
+      <div class="step-num-label">Step 6 of 6</div>
+      <div class="qualifier-tag">✦ You're a great fit</div>
+      <h2>Almost there.<br>Where shall we send<br>your audit?</h2>
+      <p class="step-sub">We'll review your answers and reach out within 4 business hours to confirm your call.</p>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label>First Name *</label>
+          <input type="text" id="firstName" placeholder="Ahmed" />
+        </div>
+        <div class="input-group">
+          <label>Last Name *</label>
+          <input type="text" id="lastName" placeholder="Al Mansouri" />
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label>Business Email *</label>
+          <input type="email" id="email" placeholder="ahmed@yourbrand.com" />
+        </div>
+        <div class="input-group">
+          <label>WhatsApp Number *</label>
+          <input type="tel" id="phone" placeholder="+971 50 XXX XXXX" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Company / Brand Name *</label>
+        <input type="text" id="company" placeholder="Your brand name" />
+      </div>
+
+      <div class="input-group">
+        <label>Website URL</label>
+        <input type="url" id="website" placeholder="https://yourbrand.com" />
+      </div>
+
+      <div class="input-group">
+        <label>Anything else you'd like us to know?</label>
+        <textarea id="notes" placeholder="Previous agency experience, specific challenges, targets..."></textarea>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(6)">← Back</button>
+        <button class="btn-next" onclick="submitForm()">Book My Free Audit →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>You're booked in.</h2>
+      <p>We've received your details and will reach out within 4 hours to confirm your free strategy call. Check your email and WhatsApp.</p>
+
+      <a href="https://wa.me/971XXXXXXXXX?text=Hi%2C%20I%20just%20submitted%20my%20audit%20form%20for%20Media247%20Digital" class="whatsapp-cta" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message us on WhatsApp
+      </a>
+
+      <div class="next-steps">
+        <div class="next-step">
+          <div class="next-step-num">01</div>
+          <h4>We review your submission</h4>
+          <p>Our team will look at your answers and prepare your custom audit notes.</p>
+        </div>
+        <div class="next-step">
+          <div class="next-step-num">02</div>
+          <h4>We reach out within 4 hours</h4>
+          <p>Expect a WhatsApp message or email to confirm your 20-minute call time.</p>
+        </div>
+        <div class="next-step">
+          <div class="next-step-num">03</div>
+          <h4>Your free audit call</h4>
+          <p>We walk you through exactly where your budget is leaking and what to do about it.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 6;
+  const answers = {};
+
+  function updateProgress(step) {
+    const pct = (step / totalSteps) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `Step ${step} of ${totalSteps}`;
+  }
+
+  function selectOption(el, key) {
+    el.closest('.options-grid').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[key] = el.dataset.value;
+
+    // Enable next button
+    const nextBtn = document.getElementById('next' + currentStep);
+    if (nextBtn) nextBtn.disabled = false;
+
+    // Disqualification check
+    if (key === 'spend' && el.dataset.value === 'under5k') {
+      document.getElementById('disqualify-spend').style.display = 'block';
+      nextBtn.disabled = true;
+    } else if (key === 'spend') {
+      document.getElementById('disqualify-spend').style.display = 'none';
+    }
+  }
+
+  function toggleMulti(el, key) {
+    el.classList.toggle('selected');
+
+    const selected = el.closest('.options-grid').querySelectorAll('.option-card.selected');
+    answers[key] = Array.from(selected).map(c => c.dataset.value);
+
+    const nextBtn = document.getElementById('next' + currentStep);
+    if (nextBtn) nextBtn.disabled = selected.length === 0;
+  }
+
+  function nextStep(from) {
+    const current = document.getElementById('step' + from);
+    const next = document.getElementById('step' + (from + 1));
+    if (!next) return;
+    current.classList.remove('active');
+    next.classList.add('active');
+    currentStep = from + 1;
+    updateProgress(currentStep);
+    window.scrollTo(0, 0);
+  }
+
+  function prevStep(from) {
+    const current = document.getElementById('step' + from);
+    const prev = document.getElementById('step' + (from - 1));
+    if (!prev) return;
+    current.classList.remove('active');
+    prev.classList.add('active');
+    currentStep = from - 1;
+    updateProgress(currentStep);
+    window.scrollTo(0, 0);
+  }
+
+  function submitForm() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const company = document.getElementById('company').value.trim();
+
+    if (!firstName || !lastName || !email || !phone || !company) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    answers.contact = { firstName, lastName, email, phone, company,
+      website: document.getElementById('website').value.trim(),
+      notes: document.getElementById('notes').value.trim()
+    };
+
+    console.log('Submission:', answers);
+
+    // Hide form steps, show success
+    document.getElementById('step6').classList.remove('active');
+    document.getElementById('progressWrap') && document.getElementById('progressWrap').remove();
+    document.getElementById('successScreen').classList.add('visible');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Complete ✓';
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>

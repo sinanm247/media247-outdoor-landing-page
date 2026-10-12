@@ -1,0 +1,352 @@
+@import '../../index.scss';
+
+.coming-soon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  
+  // Placeholder for background image - replace with your advertising image
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  background-image: url('../../assets/Banners//Banner-1.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  // If you have a local image, use this instead:
+  // background-image: url('../../assets/images/advertising-bg.jpg');
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.coming-soon-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeIn 1s ease forwards;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.company-name {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: #FF6B35;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(255, 107, 53, 0.4), 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.8s ease forwards;
+}
+
+.coming-soon-title {
+  font-size: clamp(30px, 4vw, 36px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.8s ease 0.2s forwards;
+  opacity: 0;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+    border-radius: 2px;
+  }
+}
+
+.countdown-section {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 32px 24px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 107, 53, 0.1);
+  animation: slideUp 0.8s ease 0.3s forwards;
+  opacity: 0;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.countdown-number {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  color: #FF6B35;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(255, 107, 53, 0.4), 0 4px 20px rgba(0, 0, 0, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  font-size: clamp(11px, 1.5vw, 14px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-separator {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 300;
+  color: rgba(255, 107, 53, 0.6);
+  line-height: 1;
+  margin-top: -20px;
+}
+
+.contact-section {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 107, 53, 0.1);
+  animation: slideUp 0.8s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.contact-info {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.person-name {
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.person-role {
+  font-size: clamp(13px, 1.8vw, 15px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(255, 107, 53, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.contact-link:hover {
+  background: rgba(255, 107, 53, 0.25);
+  border-color: rgba(255, 107, 53, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3), 0 0 20px rgba(255, 107, 53, 0.1);
+}
+
+.contact-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #FF6B35;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .coming-soon-content {
+    padding: 30px 16px;
+  }
+
+  .content-wrapper {
+    gap: 32px;
+  }
+
+  .countdown-section {
+    padding: 24px 16px;
+    max-width: 600px;
+  }
+
+  .countdown-grid {
+    gap: 12px;
+  }
+
+  .countdown-item {
+    min-width: 70px;
+  }
+
+  .countdown-number {
+    font-size: clamp(28px, 5vw, 42px);
+  }
+
+  .countdown-separator {
+    font-size: clamp(24px, 4vw, 36px);
+    margin-top: -15px;
+  }
+
+  .contact-section {
+    padding: 24px 20px;
+  }
+
+  .contact-info {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+
+  .contact-details {
+    gap: 12px;
+  }
+
+  .contact-link {
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-content {
+    padding: 24px 12px;
+  }
+
+  .content-wrapper {
+    gap: 28px;
+  }
+
+  .countdown-section {
+    padding: 20px 12px;
+    max-width: 100%;
+  }
+
+  .countdown-grid {
+    gap: 8px;
+  }
+
+  .countdown-item {
+    min-width: 60px;
+  }
+
+  .countdown-number {
+    font-size: clamp(24px, 4vw, 36px);
+  }
+
+  .countdown-label {
+    font-size: clamp(10px, 1.3vw, 12px);
+  }
+
+  .countdown-separator {
+    font-size: clamp(20px, 3vw, 28px);
+    margin-top: -12px;
+  }
+
+  .contact-section {
+    padding: 20px 16px;
+  }
+
+  .contact-link {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .contact-icon {
+    font-size: 18px;
+  }
+}

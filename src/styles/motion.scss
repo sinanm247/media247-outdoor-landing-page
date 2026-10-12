@@ -1,0 +1,49 @@
+// Global interaction layer. Imported once from main.jsx.
+
+// Keyframes with `backwards` fill (not transitions) so components keep their own hover transitions/transforms.
+[data-reveal]:not(.is-visible) {
+  opacity: 0;
+}
+
+[data-reveal].is-visible {
+  animation: revealUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+
+  &[data-reveal="left"] { animation-name: revealLeft; }
+  &[data-reveal="right"] { animation-name: revealRight; }
+  &[data-reveal="zoom"] { animation-name: revealZoom; }
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translate3d(0, 40px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes revealLeft {
+  from { opacity: 0; transform: translate3d(-60px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes revealRight {
+  from { opacity: 0; transform: translate3d(60px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes revealZoom {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal]:not(.is-visible) {
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

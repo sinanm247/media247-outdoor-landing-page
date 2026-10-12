@@ -1,0 +1,177 @@
+@import "../../../styles/theme";
+
+.stats-section {
+    position: relative;
+    overflow: hidden;
+    background: $ink;
+    color: $white;
+    @include section-pad;
+
+    .stats-glow {
+        position: absolute;
+        width: 720px;
+        height: 720px;
+        top: -320px;
+        right: -200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(236, 28, 36, 0.35), transparent 65%);
+        filter: blur(20px);
+        pointer-events: none;
+        animation: statsFloat 10s ease-in-out infinite alternate;
+    }
+
+    .stats-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .stats-content {
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .stats-title {
+        margin: 0;
+        @include display-title(54px);
+        color: $white;
+    }
+
+    .stats-description {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .stat-item {
+        position: relative;
+        overflow: hidden;
+        padding: 40px 36px 36px;
+        border-radius: $radius-lg;
+        background: linear-gradient(160deg, $ink-3 0%, $ink-2 100%);
+        border: 1px solid $line-dark;
+        transition: transform 0.5s $ease-out, border-color 0.4s ease, box-shadow 0.5s ease;
+        @include spotlight(rgba(236, 28, 36, 0.22), 320px);
+
+        // Lit "lightbox" edge across the top of the panel
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 36px;
+            right: 36px;
+            height: 3px;
+            border-radius: 0 0 4px 4px;
+            background: linear-gradient(90deg, transparent, $primary, transparent);
+            opacity: 0.5;
+            transition: opacity 0.4s ease, left 0.5s $ease-out, right 0.5s $ease-out;
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+            border-color: rgba(236, 28, 36, 0.45);
+            box-shadow: $glow-red;
+
+            &::before {
+                opacity: 1;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    .stat-index {
+        display: block;
+        margin-bottom: 26px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    .stat-number {
+        display: flex;
+        align-items: flex-start;
+        font-size: clamp(64px, 7vw, 108px);
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        color: $white;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .stat-suffix {
+        color: $primary;
+        font-size: 0.55em;
+        margin-left: 4px;
+        margin-top: 0.08em;
+    }
+
+    .stat-label {
+        margin-top: 22px;
+        padding-top: 20px;
+        border-top: 1px solid $line-dark;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    @include bp(1024px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stat-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            column-gap: 28px;
+            padding: 28px;
+
+            .stat-index {
+                display: none;
+            }
+
+            .stat-label {
+                margin: 0;
+                padding: 0 0 0 28px;
+                border-top: 0;
+                border-left: 1px solid $line-dark;
+            }
+        }
+    }
+
+    @include bp(500px) {
+        .stat-item {
+            grid-template-columns: 1fr;
+
+            .stat-label {
+                margin-top: 16px;
+                padding: 16px 0 0;
+                border-left: 0;
+                border-top: 1px solid $line-dark;
+            }
+        }
+    }
+}
+
+@keyframes statsFloat {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-120px, 80px); }
+}

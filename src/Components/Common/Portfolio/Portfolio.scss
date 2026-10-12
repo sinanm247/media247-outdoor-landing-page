@@ -1,0 +1,251 @@
+@import "../../../index.scss";
+
+$portfolio-bg: #0d0d0d;
+$portfolio-text: #ffffff;
+$portfolio-desc: rgba(255, 255, 255, 0.9);
+$portfolio-card-radius: 0;
+$portfolio-arrow-bg: rgba(0, 0, 0, 0.5);
+$portfolio-arrow-border: rgba(255, 255, 255, 0.25);
+
+.portfolio {
+  background: $portfolio-bg;
+  padding: 80px 0 100px;
+}
+
+.portfolio-inner {
+  margin: 0 auto;
+}
+
+.portfolio-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 56px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  .section-tagline {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $portfolio-text;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: $portfolio-text;
+    text-transform: uppercase;
+  }
+
+  .section-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: $portfolio-desc;
+    max-width: 900px;
+  }
+
+  @media (max-width: 600px) {
+    .section-tagline {
+      font-size: 16px;
+    }
+    .section-title {
+      font-size: 32px;
+    }
+    .section-description {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Slider full-bleed: no horizontal padding, attached to screen edges */
+.portfolio-slider-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.portfolio-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  // border-radius: 50%;
+  background: $portfolio-arrow-bg;
+  // border: 1px solid $portfolio-arrow-border;
+  border: none;
+  color: $portfolio-text;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.portfolio-arrow--prev {
+    left: 16px;
+  }
+
+  &.portfolio-arrow--next {
+    right: 16px;
+  }
+}
+
+.portfolio-slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+.portfolio-slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-card {
+  position: relative;
+  flex: 0 0 25%;
+  box-sizing: border-box;
+  padding: 0 6px;
+  min-width: 0;
+}
+
+.portfolio-card-image {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* Bottom overlay: theme color shade + dark gradient for text */
+.portfolio-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 16px;
+  background: linear-gradient(
+    to top,
+    rgba($primary, 0.35) 0%,
+    rgba($primary, 0.12) 35%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portfolio-card-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: $portfolio-text;
+}
+
+.portfolio-card-service {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 1024px) {
+  .portfolio-slider-track {
+    width: 250%;
+  }
+
+  .portfolio-card {
+    flex: 0 0 50%;
+    padding: 0 6px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .portfolio-arrow--prev {
+    left: 12px;
+  }
+
+  .portfolio-arrow--next {
+    right: 12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .portfolio {
+    padding: 50px 0 80px;
+  }
+
+  .portfolio-header {
+    margin-bottom: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    .portfolio-description {
+      font-size: 14px;
+    }
+  }
+
+  .portfolio-slider-track {
+    width: 500%;
+  }
+
+  .portfolio-card {
+    flex: 0 0 100%;
+    padding: 0 6px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .portfolio-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .portfolio-arrow--prev {
+    left: 8px;
+  }
+
+  .portfolio-arrow--next {
+    right: 8px;
+  }
+
+  .portfolio-card-name {
+    font-size: 16px;
+  }
+
+  .portfolio-card-service {
+    font-size: 12px;
+  }
+}

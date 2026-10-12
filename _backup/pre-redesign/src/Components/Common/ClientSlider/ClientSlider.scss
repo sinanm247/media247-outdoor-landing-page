@@ -1,0 +1,121 @@
+@import "../../../index.scss";
+
+.client-slider-section {
+    background: white;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    &::before {
+        left: 0;
+        background: linear-gradient(to right, white, transparent);
+    }
+
+    &::after {
+        right: 0;
+        background: linear-gradient(to left, white, transparent);
+    }
+
+    .client-slider-wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .client-slider-track {
+        display: flex;
+        gap: 100px;
+        align-items: center;
+        width: fit-content;
+        animation: slide 80s linear infinite;
+
+        &.paused {
+            animation-play-state: paused;
+        }
+
+        .client-image-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+            .client-image {
+                width: 100px;
+                height: auto;
+                object-fit: contain;
+                // filter: grayscale(100%);
+                // opacity: 0.6;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    filter: grayscale(0%);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 40px 0;
+
+        .client-slider-track {
+            gap: 30px;
+
+            .client-image-wrapper {
+                padding: 15px;
+
+                .client-image {
+                    height: 60px;
+                }
+            }
+        }
+
+        &::before,
+        &::after {
+            width: 50px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 30px 0;
+
+        .client-slider-track {
+            gap: 20px;
+
+            .client-image-wrapper {
+                padding: 10px;
+
+                .client-image {
+                    height: 50px;
+                }
+            }
+        }
+    }
+}
+

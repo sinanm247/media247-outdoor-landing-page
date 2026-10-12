@@ -1,0 +1,226 @@
+@import "../../../index.scss";
+
+$assets-bg: #0a0a0a;
+$assets-text: #ffffff;
+$assets-text-muted: rgba(255, 255, 255, 0.75);
+$assets-card-bg: #141414;
+$assets-card-border: rgba(255, 255, 255, 0.08);
+$assets-card-hover-border: rgba(255, 255, 255, 0.18);
+
+.assets-section {
+  background: $assets-bg;
+  padding: 100px 50px 100px;
+  min-height: 100%;
+}
+
+.assets-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.assets-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.assets-header-left {
+  .assets-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: $primary;
+    margin: 0 0 16px 0;
+  }
+
+  .assets-intro-headline {
+    font-size: 38px;
+    line-height: 1.15;
+    color: $assets-text;
+    margin: 0;
+    letter-spacing: -0.02em;
+    // max-width: 520px;
+    text-transform: uppercase;
+  }
+}
+
+.assets-intro-body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: $assets-text-muted;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .assets-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .assets-header-left .assets-intro-headline {
+    max-width: 100%;
+  }
+}
+
+.assets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 24px;
+}
+
+.assets-card {
+  background: $assets-card-bg;
+  border: 1px solid $assets-card-border;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    // transform: translateY(-6px);
+    border-color: $assets-card-hover-border;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+
+    .assets-card-image {
+      transform: scale(1.06);
+    }
+
+    .assets-card-overlay {
+      opacity: 0.85;
+    }
+
+    .assets-card-label {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.assets-card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.assets-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.assets-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  transition: opacity 0.35s ease;
+}
+
+.assets-card-label {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $primary;
+  transform: translateY(8px);
+  opacity: 0.9;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.assets-card-content {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.assets-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: $assets-text;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.assets-card-description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: $assets-text-muted;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .assets-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .assets-section {
+    padding: 50px 24px 80px;
+  }
+
+  .assets-label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+
+  .assets-intro-headline {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .assets-intro-body {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .assets-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .assets-card-content {
+    padding: 20px 20px 24px;
+  }
+
+  .assets-card-title {
+    font-size: 18px;
+  }
+
+  .assets-card-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .assets-section {
+    padding: 40px 16px 60px;
+  }
+
+  .assets-intro-headline {
+    font-size: 24px;
+  }
+
+  .assets-intro-body {
+    margin-bottom: 32px;
+  }
+}

@@ -1,0 +1,335 @@
+@import "../../../styles/theme";
+
+// Pinned horizontal gallery. Section height is set from JS (useHorizontalScroll);
+// no overflow on the section itself or `position: sticky` stops working.
+.assets-section {
+    position: relative;
+    background: $ink;
+    color: $white;
+
+    // Image height is driven by viewport height so a card + its caption always fit on screen
+    --media-h: min(calc(100svh - 420px), 34vw);
+    --card-w: calc(var(--media-h) * 16 / 9);
+
+    .assets-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 34px;
+        padding: 150px 0 40px;
+        overflow: hidden;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            left: -420px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(236, 28, 36, 0.22), transparent 65%);
+            pointer-events: none;
+        }
+    }
+
+    .assets-viewport {
+        position: relative;
+        width: 100%;
+    }
+
+    .assets-track {
+        display: flex;
+        align-items: flex-start;
+        gap: 36px;
+        width: max-content;
+        padding: 0 100px;
+        will-change: transform;
+    }
+
+    // First panel of the track: section intro
+    .assets-header {
+        flex-shrink: 0;
+        width: min(460px, 80vw);
+        min-height: var(--media-h);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 18px;
+        padding-right: 40px;
+    }
+
+    .assets-label {
+        @include eyebrow;
+    }
+
+    .assets-intro-headline {
+        margin: 0;
+        font-size: clamp(28px, 3.2vw, 48px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: $white;
+    }
+
+    .assets-intro-body {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .assets-scroll-hint {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 58px;
+        margin-top: 8px;
+        border-radius: 50%;
+        background: $primary;
+        color: $white;
+        font-size: 22px;
+        box-shadow: 0 12px 30px -10px rgba(236, 28, 36, 0.8);
+
+        // Expanding ring, like a signal pulse
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid $primary;
+            animation: hintRing 2s ease-out infinite;
+        }
+
+        svg {
+            animation: hintNudge 1.6s ease-in-out infinite;
+        }
+    }
+
+    .assets-card {
+        flex-shrink: 0;
+        width: var(--card-w);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .assets-card-media {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        border-radius: 18px;
+        background: $ink-2;
+        isolation: isolate;
+        @include spotlight(rgba(236, 28, 36, 0.25), 380px);
+
+        // Subtle bottom shade so the index chip and edges read on bright photos
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.35) 100%);
+            pointer-events: none;
+        }
+    }
+
+    .assets-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+        transition: transform 1.2s $ease-out;
+    }
+
+    .assets-card:hover .assets-card-image {
+        transform: scale(1.08);
+    }
+
+    .assets-card-index {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        z-index: 2;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: $white;
+        padding: 7px 13px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: background 0.3s ease;
+    }
+
+    .assets-card:hover .assets-card-index {
+        background: $primary;
+    }
+
+    .assets-card-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .assets-card-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: clamp(20px, 2vw, 30px);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        color: $primary;
+        position: relative;
+
+        // Red underline grows across the rule on hover
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            height: 1px;
+            background: $primary;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s $ease-out;
+        }
+    }
+
+    .assets-card:hover .assets-card-title::after {
+        transform: scaleX(1);
+    }
+
+    .assets-card-arrow {
+        flex-shrink: 0;
+        width: 46px;
+        height: 46px;
+        padding: 12px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.04);
+        color: $white;
+        transition: transform 0.45s $ease-spring, background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .assets-card:hover .assets-card-arrow {
+        background: $primary;
+        border-color: $primary;
+        transform: rotate(45deg);
+    }
+
+    .assets-card-description {
+        margin: 14px 0 0;
+        max-width: 92%;
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .assets-progress {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin: 0 100px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .assets-progress-count {
+        color: $white;
+        min-width: 22px;
+    }
+
+    .assets-progress-bar {
+        position: relative;
+        flex: 1;
+        max-width: 360px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+        border-radius: 2px;
+    }
+
+    .assets-progress-fill {
+        position: absolute;
+        inset: 0;
+        background: $primary;
+        transform: scaleX(0);
+        transform-origin: left;
+        box-shadow: 0 0 10px rgba(236, 28, 36, 0.8);
+    }
+
+    @include bp(1024px) {
+        --media-h: min(calc(100svh - 420px), 46vw);
+
+        .assets-track {
+            padding: 0 50px;
+            gap: 28px;
+        }
+
+        .assets-progress {
+            margin: 0 50px;
+        }
+    }
+
+    @include bp(768px) {
+        --card-w: 82vw;
+        --media-h: calc(82vw * 9 / 16);
+
+        .assets-sticky {
+            padding: 110px 0 30px;
+            gap: 24px;
+        }
+
+        .assets-track {
+            padding: 0 20px;
+            gap: 18px;
+        }
+
+        .assets-header {
+            width: 82vw;
+            height: auto;
+            min-height: var(--media-h);
+            padding-right: 0;
+            gap: 14px;
+        }
+
+        .assets-intro-body {
+            font-size: 14px;
+        }
+
+        .assets-card-description {
+            max-width: 100%;
+            font-size: 14px;
+        }
+
+        .assets-progress {
+            margin: 0 20px;
+        }
+    }
+}
+
+@keyframes hintNudge {
+    0%, 100% { transform: translateX(-2px); }
+    50% { transform: translateX(4px); }
+}
+
+@keyframes hintRing {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(1.7); opacity: 0; }
+}

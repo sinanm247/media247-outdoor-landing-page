@@ -1,0 +1,206 @@
+.caseStudy {
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+.swiper_container {
+    height: 30rem;
+    padding: 20rem 0;
+    position: relative;
+}
+
+.swiper_container .flexSB {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.swiper_container .aboutHeading p {
+    max-width: 300px;
+}
+
+.caseStudy .swiper-button-prev,
+.caseStudy .swiper-button-next {
+  color: #BE3030; /* Custom color */
+  font-size: 10px; /* Change the size of the arrow */
+  opacity: 0.7; /* Set opacity */
+  transition: color 0.3s ease, opacity 0.3s ease; /* Add transition effect */
+}
+
+.caseStudy .swiper-button-prev:hover,
+.caseStudy .swiper-button-next:hover {
+  color: black; /* Change color on hover */
+  opacity: 1; /* Full opacity on hover */
+}
+
+  
+ .caseStudy .flexSB {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+  }
+
+  .caseStudy .right {
+    /* width: 100%;
+    height: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .caseStudy .aboutHeading {
+    display: row;
+    justify-content: center;
+      text-align: left;
+      align-items: center;
+      padding: 0;
+      /* padding: 40px 0; */
+  }
+  
+  .caseStudy .aboutHeading h2{
+      color: #BE3030;
+      font-size: 30px;
+      font-weight: 800;
+  }
+  
+  .caseStudy .aboutHeading p {
+      max-width: 500px;
+      margin-top: 20px;
+      font-size: 18px;
+  }
+  
+  .caseStudy .flexSB .left .youtube-box {
+    max-width: 100%; /* Ensure the youtube box takes the maximum available width */
+    height: 50%; /* Maintain aspect ratio */
+  }
+  
+  
+  .caseStudy .aboutHeading h2 {
+    margin-top: 10px; /* Remove margin */
+  }
+  
+  .caseStudy .flexSB .right .aboutHeading {
+    max-width: 400px; /* Limit max width for readability */
+  }
+  
+  .caseStudy .flexSB .left .youtube-box {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Maintain proper aspect ratio */
+  }
+  
+  .caseStudy .youtube-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .caseStudy .flexSB .left, 
+  .caseStudy .flexSB .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    width: 100%; /* Ensure both sides take equal width */
+  }
+  
+  .caseStudy .flexSB .right .youtube-box {
+    margin: 0 auto;
+  }
+  
+  @media(max-width: 1150px){
+    .caseStudy .flexSB {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .swiper_container {
+        height: 50rem;
+        position: relative;
+    }
+.caseStudy .aboutHeading p {
+    max-width: 700px;
+    /* padding-right: 30px; */
+  }
+
+  .caseStudy .right {
+    padding: 20px;
+  }
+}
+  
+  @media screen and (max-width: 768px) {
+    .caseStudy .flexSB {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .caseStudy .left, .right {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      text-align: center;
+      align-items: center;
+  }
+
+  .caseStudy.aboutHome {
+      flex-direction: column-reverse;
+      padding-left: 20px;
+  }
+
+  .caseStudy .aboutHeading h3 {
+    margin-top: -20px;
+  }
+  .caseStudy .aboutHeading h2 {
+    margin-top: -20px;
+  }
+  .caseStudy .aboutHeading p {
+    margin-top: -20px;
+  }
+
+  .caseStudy .aboutHeading h1, .caseStudy .aboutHeading h2, .caseStudy .aboutHeading p, .caseStudy .aboutHeading h3 {
+      max-width: 100%;
+      text-align: center;
+      padding: 20px;
+      align-items: center;
+  }
+
+  .caseStudy .right img {
+      margin-top: 30px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+  }
+
+  .caseStudy .youtube-box {
+      width: 100%;
+  }
+
+  .caseStudy .right{
+      padding: 30px;
+  }
+}    
+
+
+@media screen and (max-width: 630px) {
+
+  .caseStudy .flexSB {
+    gap: 20px;
+  }
+  .caseStudy .flexSB .left .youtube-box {
+    max-width: 100%; /* Ensure the youtube box takes the maximum available width */
+    height: 100%; /* Maintain aspect ratio */
+  }
+    .caseStudy .flexSB .right .aboutHeading p {
+        font-size: 16px;
+    }
+    .caseStudy .swiper_container .aboutHeading p {
+      max-width: 500px;
+  }
+    .swiper_container {
+        height: 50rem;
+        /* position: relative; */
+    }
+}

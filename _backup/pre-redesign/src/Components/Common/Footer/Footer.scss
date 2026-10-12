@@ -1,0 +1,263 @@
+.footer {
+    position: relative; // Needed for absolute positioning of .wecan_stroke_text
+    overflow: hidden; // Ensures nothing spills out from footer padding issues
+    bottom: unset;
+    padding-top: 50px;
+    // padding-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background: #000000;
+    color: #ffffff;
+    // border: 1px solid white;
+
+    @media (max-width: 1310px) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    @media (max-width: 768px) {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .footer_row {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 20px;
+        position: relative;
+        margin-bottom: 20px;
+
+        @media (max-width: 1200px) {
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .footer_col {
+            padding: 0;
+            flex: 1;
+
+            &:nth-child(1) {
+                flex: 1;
+                min-width: 0;
+            }
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(4) {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .head {
+                font-size: 16px;
+                margin-bottom: 12px;
+                font-weight: 600;
+                color: #ffffff;
+            }
+
+            &.contact_us_col {
+                .company_logo {
+                    // margin-top: -15px;
+                    // margin-left: -10px;
+                    width: 150px;
+                    height: auto;
+                }
+
+                .contact_details_group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    margin-top: 10px;
+                    
+                    p {
+                        font-size: 12px;
+                        line-height: 1.6;
+                        color: rgba(255, 255, 255, 0.8);
+                        padding-right: 30px;
+                    }
+
+                    .company_website {
+                        cursor: pointer;
+                        margin-top: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        font-size: 16px;
+                        color: #ccc;
+                        text-decoration: none;
+                        position: relative;
+                        padding-bottom: 5px;
+
+                        // &::after {
+                        //     content: '';
+                        //     position: absolute;
+                        //     bottom: 0;
+                        //     left: 0;
+                        //     width: 0;
+                        //     height: 2px;
+                        //     background: #ccc;
+                        //     transition: width 0.3s ease;
+                        // }
+
+                        // &:hover {
+                        //     color: #ccc;
+                            
+                        //     &::after {
+                        //         width: 100%;
+                        //     }
+                        // }
+
+                        .website_icon {
+                            font-size: 20px;
+                        }
+
+                        .website_link {
+                            font-size: 16px;
+
+                            &:hover {
+                                color: white;
+                                transition: all 0.3s ease;
+                                transform: translateX(2px);
+                            }
+                        }
+                    }
+                }
+                // .social_links_small styling if you uncommented them in JSX
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                    list-style: none;
+                    margin-bottom: 8px;
+                    font-size: 14px;
+                    color: rgba(255, 255, 255, 0.8);
+                    line-height: 1.6;
+
+                    a {
+                        color: rgba(255, 255, 255, 0.8);
+                        text-decoration: none;
+                        transition: color 0.3s ease;
+                        &:hover {
+                            color: #EC1C24;
+                        }
+
+                        &.active {
+                            color: #EC1C24;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Disclaimer Section
+    .footer_disclaimer {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 20px 0;
+        // margin-bottom: 20px;
+        text-align: center;
+
+        p {
+            font-size: 12px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 auto;
+            max-width: 800px;
+
+            strong {
+                color: #ffffff;
+                font-weight: 600;
+            }
+        }
+
+        @media (max-width: 768px) {
+            padding: 15px 0;
+            
+            p {
+                font-size: 11px;
+            }
+        }
+    }
+
+    // Styles for the very bottom section (Privacy Policy, Terms, Copyright)
+    .bottom_footer {      
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 20px 0px 50px 0px;
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        font-size: 13px;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            text-align: center;
+            .left_section {
+                margin-bottom: 10px;
+            }
+        }
+
+        .left_section {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+
+            .footer-legal-link {
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: none;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: #EC1C24;
+                }
+            }
+
+            .separator {
+                margin: 0 10px;
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        .social_links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            a {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 20px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: #EC1C24;
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .right_section {
+            color: rgba(255, 255, 255, 0.8);
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+}

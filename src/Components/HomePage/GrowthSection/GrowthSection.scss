@@ -1,0 +1,384 @@
+@import "../../../index.scss";
+
+.growth-section {
+  // background: #F9F9F9;
+  position: relative;
+
+
+  @media (max-width: 1600px) {
+    // padding: 80px 50px;
+  }
+
+  @media (max-width: 768px) {
+    // padding: 60px 30px;
+  }
+
+  .growth-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  // Header Section
+  .growth-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    .section-tagline {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: black;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .section-description {
+      font-size: 16px;
+      line-height: 1.8;
+      color: black;
+    }
+  }
+
+  // Stats Cards Grid
+  .stats-cards-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+
+    .right-side-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+
+      .top-side-cards {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  }
+
+  @media (max-width: 600px) {
+    .growth-header {
+      .section-tagline {
+        font-size: 16px;
+      }
+      .section-title {
+        font-size: 32px;
+      }
+      .section-description {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .stat-card.case-study-card {
+    width: 30%;
+  }
+
+  .stat-card {
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-label {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .card-value {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+      margin: 15px 0;
+      display: block;
+
+      @media (max-width: 768px) {
+        font-size: 42px;
+      }
+    }
+
+    .card-description {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 10px 0;
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+      display: block;
+      margin-top: 10px;
+    }
+  }
+
+  // Case Study Card (Left)
+  .case-study-card {
+    background: #1a1a1a;
+    color: white;
+    grid-row: span 2;
+
+    @media (max-width: 1200px) {
+      grid-row: span 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+
+      .case-study-btn {
+        background: white;
+        color: #1a1a1a;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #EC1C24;
+          color: white;
+        }
+      }
+
+      .arrow-icon {
+        font-size: 20px;
+        color: white;
+        opacity: 0.8;
+      }
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-label {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-value {
+      color: white;
+    }
+
+    .card-description {
+      color: #EC1C24;
+    }
+
+    .card-tag {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.03) 2px,
+          rgba(255, 255, 255, 0.03) 4px
+        );
+      opacity: 0.5;
+      z-index: 1;
+    }
+  }
+
+  // Red Card (Middle)
+  .red-card {
+    background: #EC1C24;
+    color: white;
+
+    .card-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card-value {
+      color: white;
+    }
+  }
+
+  // Black Card (Right)
+  .black-card {
+    background: #000000;
+    color: white;
+
+    .card-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card-value {
+      color: white;
+    }
+  }
+
+  // CTA Card
+  .cta-card {
+    position: relative;
+    background: linear-gradient(135deg, #EC1C24 0%, #000000 100%);
+    border-radius: 20px;
+    padding: 40px 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 200px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      padding: 30px;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .cta-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .cta-arrow-icon {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 24px;
+      color: white;
+      opacity: 0.8;
+      z-index: 2;
+
+      @media (max-width: 768px) {
+        position: relative;
+        top: auto;
+        right: auto;
+        align-self: flex-end;
+      }
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .cta-text {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        margin: 0;
+        line-height: 1.4;
+        flex: 1;
+
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 18px;
+        }
+      }
+
+      .cta-button {
+        background: white;
+        color: #1a1a1a;
+        border: none;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          background: #EC1C24;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(236, 28, 36, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
