@@ -12,6 +12,10 @@
   color: $white;
   isolation: isolate;
 
+  @include bp(768px) {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+
   .banner-container {
     position: absolute;
     inset: 0;
@@ -73,7 +77,10 @@
     padding: 110px 100px 40px;
 
     @include bp(1024px) { padding: 100px 50px 36px; }
-    @include bp(768px) { padding: 90px 25px 30px; }
+    @include bp(768px) {
+      align-items: flex-end;
+      padding: 96px 20px 24px;
+    }
   }
 
   .hero-content-left {
@@ -268,19 +275,20 @@
   }
 
   @include bp(768px) {
+    .hero-title {
+      order: 1;
+    }
+
     .hero-subtitle {
+      order: 2;
       font-size: 10px;
       letter-spacing: 1px;
       padding: 8px 14px;
     }
 
-    .hero-description {
-      font-size: 15px;
-    }
-
+    .hero-description,
     .hero-cta-btn {
-      width: 100%;
-      padding: 16px 24px;
+      display: none;
     }
 
     .hero-ticker {
@@ -296,6 +304,63 @@
     .hero-ticker-sep {
       width: 6px;
       height: 6px;
+    }
+  }
+}
+
+.hero-fixed-btn {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 990;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  // Top corners become the outer left corners once the tab is turned upright
+  border-radius: 18px 18px 0 0;
+  background: $primary;
+  color: $white;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transform-origin: center center;
+  // Turn the label so it reads from the bottom of the tab upward, flush to the right edge
+  transform: translateX(-24px) translateX(50%) translateY(-50%) rotate(-90deg);
+  box-shadow: 0 -12px 28px -8px rgba(236, 28, 36, 0.75);
+  transition: transform 0.3s $ease-out, background 0.3s ease;
+
+  svg {
+    font-size: 18px;
+  }
+
+  &:hover {
+    color: $white;
+    background: #d4141c;
+    transform: translateX(-30px) translateX(50%) translateY(-50%) rotate(-90deg);
+  }
+
+  @include bp(768px) {
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 16px 16px 0 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transform: translateX(-22px) translateX(50%) translateY(-50%) rotate(-90deg);
+
+    svg {
+      font-size: 16px;
+    }
+
+    &:hover {
+      transform: translateX(-26px) translateX(50%) translateY(-50%) rotate(-90deg);
     }
   }
 }

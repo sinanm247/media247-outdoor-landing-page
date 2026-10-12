@@ -1,11 +1,17 @@
 import "./FeaturedAssets.scss";
 import { useEffect, useRef, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import { featuredCampaigns } from "../../../Datasets/featuredCampaigns";
+import { usePopupForm } from "../../Common/PopupForm/PopupFormContext";
 
 const pad = (n) => String(n).padStart(2, "0");
 
 export default function FeaturedAssets() {
+    const { openPopup } = usePopupForm();
     const projects = featuredCampaigns.map((item) => ({
         id: item.id,
         image: item.featuredImage,
@@ -17,10 +23,22 @@ export default function FeaturedAssets() {
     }));
 
     const [active, setActive] = useState(0);
+    const [isMobile, setIsMobile] = useState(
+        () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+    );
     const itemRefs = useRef([]);
+
+    useEffect(() => {
+        const media = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(media.matches);
+        update();
+        media.addEventListener("change", update);
+        return () => media.removeEventListener("change", update);
+    }, []);
 
     // Whichever row crosses the middle band of the viewport becomes active
     useEffect(() => {
+        if (isMobile) return;
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -31,7 +49,27 @@ export default function FeaturedAssets() {
         );
         itemRefs.current.forEach((el) => el && observer.observe(el));
         return () => observer.disconnect();
-    }, []);
+    }, [isMobile]);
+
+    const renderCampaign = (p, index) => (
+        <>
+            <div className="featured-item-media">
+                <img src={p.image} alt={p.title} loading="lazy" />
+            </div>
+            <span className="featured-item-num">{pad(index + 1)}</span>
+            <div className="featured-item-body">
+                <h3 className="featured-item-title">{p.title}</h3>
+                <p className="featured-item-meta">
+                    Brand: {p.brand} | Format: {p.format}
+                </p>
+                <p className="featured-item-location">{p.location}</p>
+                <button type="button" className="btn primary-btn featured-item-btn" onClick={openPopup}>
+                    Get A Quote
+                    <FiArrowUpRight aria-hidden="true" />
+                </button>
+            </div>
+        </>
+    );
 
     return (
         <section id="featured-campaigns" className="featured-section">
@@ -67,6 +105,23 @@ export default function FeaturedAssets() {
                     </div>
                 </div>
 
+                {isMobile ? (
+                    <Swiper
+                        modules={[Pagination]}
+                        slidesPerView={1}
+                        spaceBetween={16}
+                        pagination={{ clickable: true }}
+                        className="featured-swiper"
+                    >
+                        {projects.map((p, index) => (
+                            <SwiperSlide key={p.id}>
+                                <article className="featured-item is-active">
+                                    {renderCampaign(p, index)}
+                                </article>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                ) : (
                 <ol className="featured-list">
                     {projects.map((p, index) => (
                         <li
@@ -76,24 +131,11 @@ export default function FeaturedAssets() {
                             className={`featured-item ${index === active ? "is-active" : ""}`}
                             onMouseEnter={() => setActive(index)}
                         >
-                            <div className="featured-item-media">
-                                <img src={p.image} alt={p.title} loading="lazy" />
-                            </div>
-                            <span className="featured-item-num">{pad(index + 1)}</span>
-                            <div className="featured-item-body">
-                                <h3 className="featured-item-title">{p.title}</h3>
-                                <p className="featured-item-meta">
-                                    Brand: {p.brand} | Format: {p.format}
-                                </p>
-                                <p className="featured-item-location">{p.location}</p>
-                                <a href="/#contact-us" className="btn primary-btn featured-item-btn">
-                                    Get A Quote
-                                    <FiArrowUpRight aria-hidden="true" />
-                                </a>
-                            </div>
+                            {renderCampaign(p, index)}
                         </li>
                     ))}
                 </ol>
+                )}
             </div>
         </section>
     );

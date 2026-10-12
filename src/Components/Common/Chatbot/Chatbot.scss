@@ -545,9 +545,15 @@
 }
 
 // Mobile Responsive
+@media (max-width: 768px) {
+    .chatbot-bell-wrapper {
+        bottom: 112px;
+    }
+}
+
 @media (max-width: 480px) {
     .chatbot-bell-wrapper {
-        bottom: 80px;
+        bottom: 112px;
         right: 10px;
         gap: 8px;
     }

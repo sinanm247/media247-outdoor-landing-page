@@ -179,9 +179,18 @@
                 font-weight: 700;
                 color: #1a1a1a;
                 line-height: 1.2;
-                margin-bottom: 8px;
+                margin-bottom: 0;
                 width: 100%;
                 text-align: center;
+            }
+
+            .form-subtitle {
+                margin: 0 0 8px;
+                width: 100%;
+                text-align: center;
+                font-size: 14px;
+                line-height: 1.5;
+                color: #666;
             }
 
             .form-grid {
@@ -459,6 +468,12 @@
     }
 }
 
+@media (max-width: 1400px) {
+    .contact-form-section .contact-content {
+        padding-right: 72px;
+    }
+}
+
 @media (max-width: 1200px) {
     .contact-form-section {
         .contact-content {
@@ -484,7 +499,7 @@
 @media (max-width: 900px) {
     .contact-form-section {
         .contact-content {
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
             gap: 40px;
 
@@ -563,6 +578,10 @@
 
                 .title {
                     font-size: 22px;
+                }
+
+                .form-subtitle {
+                    display: none;
                 }
             }
         }

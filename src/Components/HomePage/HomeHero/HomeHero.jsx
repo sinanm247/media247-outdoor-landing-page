@@ -9,6 +9,7 @@ import bannerImage from "../../../assets/Banners/Banner.webp"
 import bannerVideo from "../../../assets/Banners/Banner-Video.mp4"
 import { FiArrowUpRight } from "react-icons/fi";
 import { trackPointer } from "../../../Utils/interactions";
+import { usePopupForm } from "../../Common/PopupForm/PopupFormContext";
 
 const BOT_MIN_SECONDS = 3;
 
@@ -24,6 +25,7 @@ const HERO_FORMATS = [
 
 export default function HomeHero() {
   const navigate = useNavigate();
+  const { openPopup } = usePopupForm();
   const formOpenTimeRef = useRef(null);
   const formRef = useRef(null);
 
@@ -149,6 +151,7 @@ export default function HomeHero() {
   };
 
   return (
+    <>
     <div className="home-hero" onMouseMove={trackPointer}>
       <div className="banner-container">
         <img
@@ -185,10 +188,10 @@ export default function HomeHero() {
             <p className="hero-description">
               Media 247 is Dubai's premier OOH advertising company, offering 75+ strategic outdoor and digital OOH locations across the UAE. From iconic billboard sites on Sheikh Zayed Road to airport-to-city taxi media, we connect your brand to the audiences that matter. Let's get you seen.
             </p>
-            <a href="#contact-us" className="btn primary-btn hero-cta-btn">
+            <button type="button" className="btn primary-btn hero-cta-btn" onClick={openPopup}>
               Book Your OOH Campaign
               <FiArrowUpRight className="btn-arrow" aria-hidden="true" />
-            </a>
+            </button>
           </div>
         </div>
 
@@ -330,5 +333,11 @@ export default function HomeHero() {
         </div>
       </div>
     </div>
+
+    <button type="button" className="hero-fixed-btn" aria-label="Book your campaign" onClick={openPopup}>
+      <span>Book Your Campaign</span>
+      <FiArrowUpRight aria-hidden="true" />
+    </button>
+    </>
   );
 }

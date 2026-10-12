@@ -7,6 +7,7 @@ import Header from './Components/Common/Header/Header';
 import Footer from './Components/Common/Footer/Footer';
 import Chatbot from './Components/Common/Chatbot/Chatbot';
 import ConsentPopup from './Components/Common/ConsentPopup/ConsentPopup';
+import { PopupFormProvider } from './Components/Common/PopupForm/PopupFormContext';
 import { initAttributionCapture } from './Utils/attribution';
 import { initRecaptchaOnLanding } from './Utils/recaptcha';
 
@@ -36,11 +37,13 @@ export default function App() {
       <AppLoader isVisible={pageLoading} />
         {!pageLoading && (
           <Fragment>
+            <PopupFormProvider>
             <Header />
             <AppRouter routes={routes} />
             <Footer />
             <ConsentPopup />
             {location.pathname !== '/thank-you' && <Chatbot />}
+            </PopupFormProvider>
           </Fragment>
         )}
     </>

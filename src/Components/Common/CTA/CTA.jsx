@@ -1,6 +1,7 @@
 import "./CTA.scss";
 import { FiArrowUpRight } from "react-icons/fi";
 import { trackPointer } from "../../../Utils/interactions";
+import { usePopupForm } from "../PopupForm/PopupFormContext";
 
 const CTA_CONTENT = {
     tagline: "GET IN TOUCH",
@@ -9,11 +10,11 @@ const CTA_CONTENT = {
         "Media 247 offers the UAE's most strategic OOH and digital out-of-home advertising locations — from Sheikh Zayed Road hoardings to Dubai Mall DOOH screens and the city's largest taxi media fleet. Slots fill fast. Secure your outdoor advertising placement today.",
     ],
     buttonText: "Book Your OOH Campaign",
-    buttonLink: "#contact-us",
 };
 
 export default function CTA() {
-    const { tagline, title, paragraphs, buttonText, buttonLink } = CTA_CONTENT;
+    const { tagline, title, paragraphs, buttonText } = CTA_CONTENT;
+    const { openPopup } = usePopupForm();
 
     return (
         <section id="cta-section" className="common-cta-section" onMouseMove={trackPointer}>
@@ -28,10 +29,10 @@ export default function CTA() {
                         <p key={index} className="cta-paragraph">{paragraph}</p>
                     ))}
                 </div>
-                <a href={buttonLink} className="btn primary-btn">
+                <button type="button" className="btn primary-btn" onClick={openPopup}>
                     {buttonText}
                     <FiArrowUpRight className="cta-btn-arrow" aria-hidden="true" />
-                </a>
+                </button>
             </div>
         </section>
     );

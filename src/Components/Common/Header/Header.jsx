@@ -8,11 +8,14 @@ import { navLinks } from '../../../Utils/App.util'
 import { RiMenu2Line } from 'react-icons/ri'
 import { IoClose } from 'react-icons/io5'
 import { MdCall } from "react-icons/md";
+import { FiArrowUpRight } from "react-icons/fi";
+import { usePopupForm } from "../PopupForm/PopupFormContext";
 
 // import { trackWhatsAppClick } from '../../../Utils/emailService' // Lead ID - commented off for now
 
 export default function Header(){
     const location = useLocation()
+    const { openPopup } = usePopupForm()
     const [ isSticky, setIsSticky ] = useState(false)
     const [ activeSection, setActiveSection ] = useState("")
 
@@ -31,11 +34,6 @@ export default function Header(){
             }
         }
         setMobileMenu(false);
-    }
-
-    const handleContactUsClick = (e) => {
-        e.preventDefault();
-        handleNavClick(e, "#contact-us");
     }
 
     const isThankYouPage = location.pathname === "/thank-you";
@@ -195,14 +193,17 @@ export default function Header(){
 
                 {/* Right Contact Us Button */}
                 <div className="contact-btn-wrapper">
-                    <a 
-                        href="#contact-us" 
+                    <button
+                        type="button"
                         className="contact-header-btn"
-                        onClick={handleContactUsClick}
+                        onClick={() => {
+                            setMobileMenu(false);
+                            openPopup();
+                        }}
                     >
                         CONTACT US
                         <MdCall className="contact-header-btn-icon" aria-hidden="true" />
-                    </a>
+                    </button>
                 </div>
 
                 {/* Menu Icon - hidden on thank-you page */}
@@ -228,14 +229,20 @@ export default function Header(){
             
             {/* Fixed Contact Us Button for Mobile */}
             {!isThankYouPage && (
-                <a 
-                    href="#contact-us" 
-                    className="contact-fixed-btn"
-                    onClick={handleContactUsClick}
-                >
-                    {/* Contact Us */}
-                    <MdCall />
-                </a>
+                <div className="contact-fixed-bar">
+                    <button
+                        type="button"
+                        className="contact-fixed-btn"
+                        onClick={() => {
+                            setMobileMenu(false);
+                            openPopup();
+                        }}
+                    >
+                        <MdCall className="contact-fixed-btn-icon" aria-hidden="true" />
+                        <span className="contact-fixed-btn-label">Get a Free Quote</span>
+                        <FiArrowUpRight className="contact-fixed-btn-arrow" aria-hidden="true" />
+                    </button>
+                </div>
             )}
         </nav>
     );

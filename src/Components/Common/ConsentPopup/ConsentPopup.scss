@@ -175,6 +175,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .consent-popup-banner {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (max-width: 600px) {
   .consent-popup-banner {
     padding: 16px 16px 20px;
